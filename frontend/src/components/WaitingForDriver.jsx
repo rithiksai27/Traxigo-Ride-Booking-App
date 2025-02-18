@@ -11,6 +11,7 @@ const WaitingForDriver = ({ props }) => {
       >
         <i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i>
       </h5>
+      
       <div className="flex items-center justify-between">
         <img
           className="h-12"
