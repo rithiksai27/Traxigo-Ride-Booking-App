@@ -8,7 +8,7 @@ const CaptainDetails = () => {
         <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-md">
     <div className="flex items-center gap-4">
       <img 
-        src="https://images.unsplash.com/photo-1618721405821-80ebc4b63d26?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
         alt="Driver" 
         className="w-12 h-12 rounded-full object-cover border-2 border-gray-300 shadow-sm" 
       />
