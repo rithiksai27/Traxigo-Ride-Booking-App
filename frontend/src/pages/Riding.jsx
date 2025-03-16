@@ -1,7 +1,16 @@
-import {Link} from 'react-router-dom'
-
-
+import {Link, useLocation} from 'react-router-dom'
+import { useContext } from 'react';
+import { SocketContext } from '../context/SocketContext';
+import { useNavigate } from 'react-router-dom';
 const Riding = () => {
+  const location = useLocation();
+  const {ride} = location.state || {}
+  const {socket} = useContext(SocketContext)
+  const navigate = useNavigate()
+  socket.on("ride-ended", () => {
+    navigate("/home")
+  })
+
     return (
       <div className="h-screen flex flex-col">
 
@@ -28,9 +37,9 @@ const Riding = () => {
               alt="Rider"
             />
             <div className="text-right">
-              <h2 className="text-lg font-medium">Rithik</h2>
-              <h4 className="text-xl font-semibold">AP16 AB 1234</h4>
-              <p className="text-sm text-gray-600">BMW M5</p>
+            <h2 className='text-lg font-medium capitalize'>{ride?.captain.fullname.firstname}</h2>
+                        <h4 className='text-xl font-semibold -mt-1 -mb-1'>{ride?.captain.vehicle.plate}</h4>
+                        <p className='text-sm text-gray-600'>Maruti Suzuki Alto</p>
             </div>
           </div>
   
@@ -41,7 +50,7 @@ const Riding = () => {
               <i className="text-lg ri-map-pin-2-fill text-green-600"></i>
               <div>
                 <h3 className="text-lg font-medium">562/11-A</h3>
-                <p className="text-sm text-gray-600">Machavaram, Andhra Pradesh</p>
+                <p className='text-sm -mt-1 text-gray-600'>{ride?.destination}</p>
               </div>
             </div>
   
@@ -49,7 +58,7 @@ const Riding = () => {
             <div className="flex items-center gap-4 p-3 border rounded-lg shadow-sm">
               <i className="text-lg ri-currency-line text-yellow-500"></i>
               <div>
-                <h3 className="text-lg font-medium">₹193.20</h3>
+              <h3 className='text-lg font-medium'>₹{ride?.fare} </h3>
                 <p className="text-sm text-gray-600">Cash</p>
               </div>
             </div>

@@ -29,14 +29,6 @@ const CaptainHome = () => {
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(position => {
 
-              console.log({
-                userId: captain._id,
-                location: {
-                  ltd: position.coords.latitude,
-                  lng: position.coords.longitude
-                }
-              })
-
               socket.emit('update-location-captain', {
                   userId: captain._id,
                   location: {
@@ -79,10 +71,11 @@ async function confirmRide() {
   setRidePopupPanel(false)
   setConfirmRidePopupPanel(true)
 
+
   }
 
   useGSAP(() => {
-    if (ridePopupPanelRef.current) {  // ✅ Ensure ref exists before animating
+    if (ridePopupPanelRef.current) {  
       gsap.to(ridePopupPanelRef.current, {
         transform: ridePopupPanel ? "translateY(0)" : "translateY(100%)",
       });
@@ -90,7 +83,7 @@ async function confirmRide() {
   }, [ridePopupPanel]);
 
   useGSAP(() => {
-    if (confirmRidePopupPanelRef.current) {  // ✅ Ensure ref exists before animating
+    if (confirmRidePopupPanelRef.current) {  
       gsap.to(confirmRidePopupPanelRef.current, {
         transform: confirmRidePopupPanel ? "translateY(0)" : "translateY(100%)",
       });
