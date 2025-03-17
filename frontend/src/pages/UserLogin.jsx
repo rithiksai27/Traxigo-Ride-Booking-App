@@ -1,92 +1,117 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { UserDataContext } from '../context/UserContext'  // Corrected import (use lowercase 'userDataContext')
+import { UserDataContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const UserLogin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { user, setUser } = useContext(UserDataContext)  // Use the correct context name
+  const { setUser } = useContext(UserDataContext)
   const navigate = useNavigate()
 
   const submitHandler = async (e) => {
     e.preventDefault()
 
-    const userData = {
-      email: email,
-      password: password
-    }
+    const userData = { email, password }
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
 
       if (response.status === 200) {
         const data = response.data
-        setUser(data.user)  // Update the context with the logged-in user
-        localStorage.setItem('token',data.token)
-        navigate('/home')  // Redirect user to the homepage after successful login
+        setUser(data.user)
+        localStorage.setItem('token', data.token)
+        navigate('/home')
       }
     } catch (error) {
-      console.error('Login failed:', error)  // Handle any errors that might occur during login
+      console.error('Login failed:', error)
     }
 
-    // Clear form fields after submitting
     setEmail('')
     setPassword('')
   }
 
   return (
-    <div className="p-7 h-screen flex flex-col justify-between">
-      <div>
-        <img
-          className="w-16 mb-10"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s"
-          alt="Logo"
-        />
+    <div className="h-screen flex items-center justify-center bg-[#0A0A0A] relative overflow-hidden">
+      {/* Background Gradient Circles */}
+      <div className="absolute w-80 h-80 bg-[#00c6ff] opacity-20 rounded-full blur-3xl top-10 left-10"></div>
+      <div className="absolute w-80 h-80 bg-[#ff00ff] opacity-20 rounded-full blur-3xl bottom-10 right-10"></div>
 
-        <form onSubmit={submitHandler}>
-          <h3 className="text-lg font-medium mb-2">What's your email</h3>
-          <input
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base"
-            type="email"
-            placeholder="email@example.com"
-          />
+      {/* Glassmorphic Login Card */}
+      <div className="bg-white/10 backdrop-blur-lg shadow-2xl rounded-2xl p-10 w-[95%] sm:w-[400px] animate-fade-in">
+        {/* Logo & Heading */}
+        <div className="flex flex-col items-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 whitespace-nowrap">
+            Welcome to <span className="text-[#00c6ff]">Traxigo</span>
+          </h1>
+          <p className="text-gray-400 text-center mb-6 text-sm">
+            Log in to continue your journey with us.
+          </p>
+        </div>
 
-          <h3 className="text-lg font-medium mb-2">Enter Password</h3>
-          <input
-            required
-            className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="password"
-          />
+        {/* Login Form */}
+        <form onSubmit={submitHandler} className="space-y-6">
+          <div>
+            <label className="block text-gray-300 text-sm mb-2">Email</label>
+            <input
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 text-white bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00c6ff] outline-none"
+              type="email"
+              placeholder="email@example.com"
+            />
+          </div>
 
-          <button className="bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg">
+          <div>
+            <label className="block text-gray-300 text-sm mb-2">Password</label>
+            <input
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 text-white bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00c6ff] outline-none"
+              type="password"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button className="w-full bg-[#00c6ff] text-white font-semibold rounded-lg py-3 hover:bg-[#009bd6] transition-all duration-300">
             Login
           </button>
         </form>
 
-        <p className="text-center">
-          New here?{" "}
-          <Link to="/signup" className="text-blue-600">
-            Create new Account
-          </Link>
-        </p>
-      </div>
+        {/* Links */}
+        <div className="text-center mt-5">
+          <p className="text-gray-400">
+            New here?{' '}
+            <Link to="/signup" className="text-[#ff00ff] font-semibold">
+              Create an account
+            </Link>
+          </p>
+        </div>
 
-      <div>
+        {/* Captain Login */}
         <Link
           to="/captain-login"
-          className="bg-[#10b461] flex items-center justify-center text-white font-semibold mb-5 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base"
+          className="block mt-6 w-full text-center bg-[#ff00ff] text-white font-semibold rounded-lg py-3 hover:bg-[#d600d6] transition-all duration-300"
         >
           Sign in as Captain
         </Link>
       </div>
+
+      {/* CSS Animations */}
+      <style>
+        {`
+          @keyframes fade-in {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+          }
+          .animate-fade-in {
+            animation: fade-in 0.6s ease-out;
+          }
+        `}
+      </style>
     </div>
   )
 }
