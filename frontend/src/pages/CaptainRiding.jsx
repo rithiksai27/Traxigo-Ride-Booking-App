@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useGSAP } from "@gsap/react"; // ✅ Added missing import
 import gsap from "gsap"; // ✅ Added missing import
 import FinishRide from "../components/FinishRide";
+import LiveTracking from "../components/LiveTracking";
 
 const CaptainRiding = () => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
@@ -37,13 +38,7 @@ const CaptainRiding = () => {
         </Link>
       </div>
 
-      <div className="h-4/5">
-        <img
-          className="h-full w-full object-cover"
-          src="https://www.medianama.com/wp-content/uploads/2018/06/Screenshot_20180619-112715.png.png"
-          alt="Background"
-        />
-      </div>
+    
 
       <div className="h-1/5 flex items-center justify-between p-6 bg-yellow-400"
         onClick={()=>{
@@ -64,12 +59,18 @@ const CaptainRiding = () => {
 
       <div
         ref={finishRidePanelRef}
-        className="fixed w-full z-10 translate-y-full bottom-0 bg-white px-3 py-10 pt-12"
+        className="fixed w-full z-[500] translate-y-full bottom-0 bg-white px-3 py-10 pt-12"
       >
         <FinishRide 
         ride = {rideData}
         setFinishRidePanel = {setFinishRidePanel} />
       </div>
+
+      <div className="h-screen fixed w-screen top-0 z-[-1]">
+       <LiveTracking />
+      </div>
+
+
     </div>
   );
 };

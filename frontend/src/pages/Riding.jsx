@@ -2,6 +2,7 @@ import {Link, useLocation} from 'react-router-dom'
 import { useContext } from 'react';
 import { SocketContext } from '../context/SocketContext';
 import { useNavigate } from 'react-router-dom';
+import LiveTracking from '../components/LiveTracking';
 const Riding = () => {
   const location = useLocation();
   const {ride} = location.state || {}
@@ -20,11 +21,7 @@ const Riding = () => {
 
         {/* Top Half: Image Section */}
         <div className="h-1/2">
-          <img
-            className="h-full w-full object-cover"
-            src="https://www.medianama.com/wp-content/uploads/2018/06/Screenshot_20180619-112715.png.png"
-            alt="Background"
-          />
+          <LiveTracking />
         </div>
   
         {/* Bottom Half: Details Section */}

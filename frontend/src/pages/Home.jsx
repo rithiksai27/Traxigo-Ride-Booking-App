@@ -12,6 +12,7 @@ import { SocketContext } from '../context/SocketContext';
 import { useContext } from 'react';
 import { UserDataContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import LiveTracking from '../components/LiveTracking';
 
 const Home = () => {
   const [ pickup, setPickup ] = useState('')
@@ -171,11 +172,7 @@ async function createRide() {
       />
 
       <div className="h-screen w-screen">
-        <img
-          className="h-full w-full object-cover"
-          src="https://www.medianama.com/wp-content/uploads/2018/06/Screenshot_20180619-112715.png.png"
-          alt="Background"
-        />
+       <LiveTracking />
       </div>
 
       <div className="flex flex-col justify-end h-screen absolute top-0 w-full">
