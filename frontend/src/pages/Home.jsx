@@ -165,58 +165,66 @@ async function createRide() {
 
   return (
     <div className="h-screen relative overflow-hidden">
-      <img
-        className="w-16 absolute left-5 top-5"
-        src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-        alt="Uber Logo"
-      />
-
       <div className="h-screen w-screen">
        <LiveTracking />
       </div>
 
       <div className="flex flex-col justify-end h-screen absolute top-0 w-full">
-        <div className="h-[30%] p-6 bg-white relative">
-          <h5
-            ref={panelCloseRef}
-            onClick={() => setPanelOpen(false)}
-            className="absolute opacity-0 right-6 top-6 text-2xl cursor-pointer"
-          >
-            <i className="ri-arrow-down-wide-line"></i>
-          </h5>
-          <h4 className="text-2xl font-semibold">Find a trip</h4>
-          <form>
-            <div className="line absolute h-16 w-1 top-[45%] left-10 bg-gray-900 rounded-full"></div>
-            <input
-              onClick={() => {
-                setPanelOpen(true);
-                setActiveField("pickup");
-              }}
-              value={pickup}
-              onChange={handlePickupChange}
-              className="bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-5"
-              type="text"
-              placeholder="Add a pick-up location"
-            />
-            <input
-              onClick={() => {
-                setPanelOpen(true);
-                setActiveField("destination");
-              }}
-              value={destination}
-              onChange={handleDestinationChange}
-              className="bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-3"
-              type="text"
-              placeholder="Enter your destination"
-            />
-          </form>
-          <button
-            onClick={findTrip}
-            className="bg-black text-white px-4 py-2 rounded-lg mt-3 w-full">
-            Find Trip
-          </button>
-        </div>
-        <div ref={panelRef} className="bg-white h-0 overflow-hidden">
+  <div className="h-[30%] p-6 bg-[#1E293B] relative rounded-t-3xl shadow-lg">
+    {/* Close Button */}
+    <h5
+      ref={panelCloseRef}
+      onClick={() => setPanelOpen(false)}
+      className="absolute opacity-0 right-6 top-6 text-2xl cursor-pointer text-gray-400"
+    >
+      <i className="ri-arrow-down-wide-line"></i>
+    </h5>
+
+    {/* Title */}
+    <h4 className="text-2xl font-semibold text-white">Find a trip</h4>
+
+    {/* Form */}
+    <form>
+      
+
+      {/* Pickup Input */}
+      <input
+        onClick={() => {
+          setPanelOpen(true);
+          setActiveField("pickup");
+        }}
+        value={pickup}
+        onChange={handlePickupChange}
+        className="bg-[#2D2F33] text-white px-12 py-2 text-base rounded-lg w-full mt-5 border border-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#86A8E7]"
+        type="text"
+        placeholder="Add a pick-up location"
+      />
+
+      {/* Destination Input */}
+      <input
+        onClick={() => {
+          setPanelOpen(true);
+          setActiveField("destination");
+        }}
+        value={destination}
+        onChange={handleDestinationChange}
+        className="bg-[#2D2F33] text-white px-12 py-2 text-base rounded-lg w-full mt-3 border border-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#86A8E7]"
+        type="text"
+        placeholder="Enter your destination"
+      />
+    </form>
+
+    {/* Find Trip Button */}
+    <button
+      onClick={findTrip}
+      className="bg-[#86A8E7] text-[#181A1B] px-4 py-3 text-lg font-semibold rounded-lg mt-4 w-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+    >
+      Find Trip
+    </button>
+  </div>
+
+
+        <div ref={panelRef} className="h-0 overflow-hidden">
           <LocationSearchPanel
             suggestions={activeField === "pickup" ? pickupSuggestions : destinationSuggestions}
             setPanelOpen={setPanelOpen}
@@ -230,7 +238,7 @@ async function createRide() {
 
       <div
         ref={vehiclePanelRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-[#20293A] px-3 py-10 pt-12"
       >
         <VehiclePanel
           selectVehicle = {setVehicleType}
@@ -242,7 +250,7 @@ async function createRide() {
 
       <div
         ref={confirmRidePanelRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-[#20293A] px-3 py-6 pt-12"
       >
        <ConfirmRide
           createRide={createRide}
@@ -258,7 +266,7 @@ async function createRide() {
 
       <div
         ref={vehicleFoundRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-[#20293A] px-3 py-6 pt-12"
       >
         <LookingForDriver 
         createRide={createRide}
@@ -271,7 +279,7 @@ async function createRide() {
 
       <div
         ref={waitingForDriverRef}
-        className="fixed w-full z-10 bottom-0 bg-white px-3 py-6 pt-12"
+        className="fixed w-full z-10 bottom-0 bg-[#20293A] px-3 py-6 pt-12"
       >
         <WaitingForDriver 
          ride={ride}

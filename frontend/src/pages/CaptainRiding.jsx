@@ -40,22 +40,28 @@ const CaptainRiding = () => {
 
     
 
-      <div className="h-1/5 flex items-center justify-between p-6 bg-yellow-400"
-        onClick={()=>{
-            setFinishRidePanel(true)
-        }}
-      >
-        <h5
-          className="p-1 text-center w-[90%] absolute top-0"
-          onClick={() => {}}
-        >
-          <i className="text-3xl text-gray-800 ri-arrow-up-wide-line"></i>
-        </h5>
-        <h4 className="text-xl font-semibold">4 KM away</h4>
-        <button className="bg-green-600 text-white font-semibold p-3 px-10 rounded-lg">
-          Complete Ride
-        </button>
-      </div>
+      <div
+  className="h-1/5 flex items-center justify-between p-6 bg-[#1D2534] shadow-lg rounded-xl relative overflow-hidden transition-transform duration-300 hover:scale-105"
+  onClick={() => {
+    setFinishRidePanel(true);
+  }}
+>
+  {/* Upward arrow for interaction */}
+  <h5 className="p-1 text-center w-[90%] absolute top-1 left-1/2 transform -translate-x-1/2">
+    <i className="text-3xl text-gray-500 ri-arrow-up-wide-line transition-all duration-300 hover:text-gray-300 hover:scale-110"></i>
+  </h5>
+
+  {/* Distance Info */}
+  <h4 className="text-xl font-semibold text-white drop-shadow-md">
+    4 KM away
+  </h4>
+
+  {/* Complete Ride Button */}
+  <button className="bg-green-600 text-white font-semibold p-3 px-10 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:bg-green-700 active:scale-95">
+    Complete Ride
+  </button>
+</div>
+
 
       <div
         ref={finishRidePanelRef}

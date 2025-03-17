@@ -1,46 +1,51 @@
+import React from 'react';
 
 const ConfirmRide = (props) => {
     return (
-        <div>
-            <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
-                props.setConfirmRidePanel(false)
-            }}><i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
-            <h3 className='text-2xl font-semibold mb-5'>Confirm your Ride</h3>
+        <div className="bg-[#181A1B] text-white shadow-xl rounded-t-2xl p-5 animate-slide-up border border-gray-700">
+            {/* Close Button */}
+            <h5 className="p-1 text-center w-[93%] absolute top-2 cursor-pointer" onClick={() => props.setConfirmRidePanel(false)}>
+                <i className="text-3xl text-gray-500 hover:text-gray-300 transition-all ri-arrow-down-wide-line"></i>
+            </h5>
 
-            <div className='flex gap-2 justify-between flex-col items-center'>
-                <img className='h-20' src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg" alt="" />
-                <div className='w-full mt-5'>
-                    <div className='flex items-center gap-5 p-3 border-b-2'>
-                        <i className="ri-map-pin-user-fill"></i>
-                        <div>
-                            <h3 className='text-lg font-medium'>562/11-A</h3>
-                            <p className='text-sm -mt-1 text-gray-600'>{props.pickup}</p>
+            {/* Header */}
+            <h3 className="text-2xl font-semibold text-[#86A8E7] mb-5 text-center">Confirm Your Ride</h3>
+
+            {/* Ride Details */}
+            <div className="flex flex-col items-center gap-4">
+                <img className="h-24 rounded-lg shadow-lg" src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg" alt="Selected Vehicle" />
+
+                <div className="w-full mt-5 space-y-3">
+                    {[
+                        { icon: "ri-map-pin-user-fill", label: "Pickup Location", value: props.pickup },
+                        { icon: "ri-map-pin-2-fill", label: "Destination", value: props.destination },
+                        { icon: "ri-currency-line", label: "Fare", value: `₹${props.fare[props.vehicleType]}`, subtext: "Cash" }
+                    ].map((item, index) => (
+                        <div key={index} className="flex items-center gap-5 p-4 border border-gray-600 hover:border-gray-300 rounded-lg shadow-md transition-all duration-200 hover:scale-[1.02] bg-[#1E293B]">
+                            <i className={`${item.icon} text-xl text-[#86A8E7]`}></i>
+                            <div>
+                                <h3 className="text-lg font-medium">{item.label}</h3>
+                                <p className="text-sm -mt-1 text-gray-400">{item.value}</p>
+                                {item.subtext && <p className="text-xs text-gray-500">{item.subtext}</p>}
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex items-center gap-5 p-3 border-b-2'>
-                        <i className="text-lg ri-map-pin-2-fill"></i>
-                        <div>
-                            <h3 className='text-lg font-medium'>562/11-A</h3>
-                            <p className='text-sm -mt-1 text-gray-600'>{props.destination}</p>
-                        </div>
-                    </div>
-                    <div className='flex items-center gap-5 p-3'>
-                        <i className="ri-currency-line"></i>
-                        <div>
-                            <h3 className='text-lg font-medium'>₹{props.fare[ props.vehicleType ]}</h3>
-                            <p className='text-sm -mt-1 text-gray-600'>Cash</p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
-                <button onClick={() => {
-                    props.setVehicleFound(true)
-                    props.setConfirmRidePanel(false)
-                    props.createRide()
 
-                }} className='w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg'>Confirm</button>
+                {/* Confirm Button */}
+                <button 
+                    onClick={() => {
+                        props.setVehicleFound(true);
+                        props.setConfirmRidePanel(false);
+                        props.createRide();
+                    }} 
+                    className="w-full mt-5 bg-[#86A8E7] text-white font-semibold p-3 rounded-lg shadow-md transition-all duration-300 hover:bg-[#5f7bb6] hover:shadow-lg hover:scale-[1.05] active:scale-[0.98]"
+                >
+                    Confirm Ride
+                </button>
             </div>
         </div>
-    )
+    );
 }
 
-export default ConfirmRide
+export default ConfirmRide;
